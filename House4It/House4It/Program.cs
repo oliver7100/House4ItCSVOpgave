@@ -16,10 +16,10 @@ internal class Program
     {
         var csvFileDescription = new CsvFileDescription
         {
-            FirstLineHasColumnNames = true, //Først linje har coloumn navne
-            IgnoreUnknownColumns = true, //Hvis column navne ikke matcher så ignorer det
-            SeparatorChar = ';', //Seprate hver Semikolon
-            UseFieldIndexForReadingData = false //Hvis man ikke har column navne kan man bruge index til at read med
+            FirstLineHasColumnNames = true, //Tjekker om første linje har coloumn navne
+            IgnoreUnknownColumns = true, //Hvis column navne ikke matcher så ignorer dette
+            SeparatorChar = ';', //Separate hver Semikolon
+            UseFieldIndexForReadingData = false //Hvis man ikke har column navne, kan man bruge index til at read med
         };
 
         var csvContext = new CsvContext();
@@ -32,12 +32,12 @@ internal class Program
 
         foreach (var priceListe in priceLists)
         {
-            //Store listen i en var
+            //Store listen i en variable
             var result = new ResultProduct();
 
             //Vi Cutter stringen, da den indeholder euro tegn.
             string Cut = priceListe.KostPrisEur.Substring(0, priceListe.KostPrisEur.Length - 2);
-            //Vi replacer her da C# læser komma anderledes. 
+            //Vi replacer komma til punktum, da C# læser komma anderledes. 
             Cut = Cut.Replace(',', '.');
             
 
@@ -83,7 +83,7 @@ internal class Program
             result.salesPrice = Percentage.ToString() + " DK";
 
 
-            //Tilføjer de ny koloner til en ny oprettet CSV fil.
+            //Tilføjer de nye koloner til, en ny oprettet CSV fil.
             newResult.Add(result);
             
          Console.WriteLine("Ny csv fil er blevet oprettet");

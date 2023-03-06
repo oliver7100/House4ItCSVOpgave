@@ -36,7 +36,7 @@ namespace House4It
 
     }
 
-    //Oprettelse af den nye liste
+    //Objekter til den nye CSV fil
     public class ResultProduct
     {
         [CsvColumn(Name = "Item", FieldIndex = 1)]

@@ -8,7 +8,7 @@ using LINQtoCSV;
 
 namespace House4It
 {
-
+    //Læser prisliste og store dem i objekter
     [Serializable]
     public class PrisListe
     {
@@ -36,6 +36,7 @@ namespace House4It
 
     }
 
+    //Oprettelse af den nye liste
     public class ResultProduct
     {
         [CsvColumn(Name = "Item", FieldIndex = 1)]

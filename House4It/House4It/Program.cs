@@ -6,7 +6,6 @@ internal class Program
     static void Main(string[] args)
     {
        ReadCsvFile();
-
         Console.ReadKey();
 
     }
@@ -17,20 +16,23 @@ internal class Program
     {
         var csvFileDescription = new CsvFileDescription
         {
-            FirstLineHasColumnNames = true,
-            IgnoreUnknownColumns = true,
-            SeparatorChar = ';',
-            UseFieldIndexForReadingData = false
+            FirstLineHasColumnNames = true, //Først linje har coloumn navne
+            IgnoreUnknownColumns = true, //Hvis column navne ikke matcher så ignorer det
+            SeparatorChar = ';', //Seprate hver Semikolon
+            UseFieldIndexForReadingData = false //Hvis man ikke har column navne kan man bruge index til at read med
         };
 
         var csvContext = new CsvContext();
+
+        //Læser PrisListe 
         var priceLists = csvContext.Read<PrisListe>("Prisliste.csv", csvFileDescription);
 
-
+        //Ny liste til den nye CSV fil
         var newResult = new List<ResultProduct>();
 
         foreach (var priceListe in priceLists)
         {
+            //Store listen i en var
             var result = new ResultProduct();
 
             //Vi Cutter stringen, da den indeholder euro tegn.
@@ -84,10 +86,7 @@ internal class Program
             //Tilføjer de ny koloner til en ny oprettet CSV fil.
             newResult.Add(result);
             
-         
-
-            Console.WriteLine($"{priceListe.Item} | {priceListe.ArticleDescription} |  {priceListe.KostPrisEur} ");
-            Console.WriteLine(" ");
+         Console.WriteLine("Ny csv fil er blevet oprettet");
         }
 
 
@@ -95,9 +94,11 @@ internal class Program
         CsvFileDescription outputFileDescription = new CsvFileDescription
         {
             SeparatorChar = ';',
-            FileCultureName = "da-DK"
+            FileCultureName = "da-DK" //Formatering til dansk format
         };
 
+
+        //Skaber den nye csv fil
         CsvContext cc = new CsvContext();
         cc.Write(
             newResult.ToArray(),
